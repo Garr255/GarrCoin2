@@ -31,7 +31,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0x000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f");
+uint256 hashGenesisBlock("0x00000000a2da6947a0d29012d67d182b722d3b79261b3a2eb30136ef47326106");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 32);
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -1052,16 +1052,16 @@ uint256 static GetOrphanRoot(const CBlockHeader* pblock)
 
 int64 static GetBlockValue(int nHeight, int64 nFees)
 {
-    int64 nSubsidy = 50 * COIN;
+    int64 nSubsidy = 100 * COIN;
 
     // Subsidy is cut in half every 210000 blocks, which will occur approximately every 4 years
-    nSubsidy >>= (nHeight / 210000);
+    nSubsidy >>= (nHeight / 1000);
 
     return nSubsidy + nFees;
 }
 
-static const int64 nTargetTimespan = 14 * 24 * 60 * 60; // two weeks
-static const int64 nTargetSpacing = 10 * 60;
+static const int64 nTargetTimespan = 1 * 24 * 60 * 60; // 1 day (1d * 24h * 60m * 60s)
+static const int64 nTargetSpacing = 7 * 60; // (7m * 60s)
 static const int64 nInterval = nTargetTimespan / nTargetSpacing;
 
 //
@@ -2688,11 +2688,11 @@ bool LoadBlockIndex()
 {
     if (fTestNet)
     {
-        pchMessageStart[0] = 0x0b;
-        pchMessageStart[1] = 0x11;
-        pchMessageStart[2] = 0x09;
-        pchMessageStart[3] = 0x07;
-        hashGenesisBlock = uint256("000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943");
+        pchMessageStart[0] = 0x12;
+        pchMessageStart[1] = 0x13;
+        pchMessageStart[2] = 0x14;
+        pchMessageStart[3] = 0x15;
+        hashGenesisBlock = uint256("00000000a2da6947a0d29012d67d182b722d3b79261b3a2eb30136ef47326106");
     }
 
     //
@@ -2725,21 +2725,21 @@ bool InitBlockIndex() {
         //   vMerkleTree: 4a5e1e
 
         // Genesis block
-        const char* pszTimestamp = "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks";
+        const char* pszTimestamp = "Cyprus Mail 13/Apr/2013 Money is just paper with dead criminals painted on it";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CBigNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
         txNew.vout[0].nValue = 50 * COIN;
-        txNew.vout[0].scriptPubKey = CScript() << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f") << OP_CHECKSIG;
+        txNew.vout[0].scriptPubKey = CScript() << ParseHex("04EF4277AA9434D8642F88C880F68F185ED1C6850AB4E641DEB6A6C288F3F0E55663323EE5B2F374D6EE08F5E69850C39D671B9AB684255483A704926A07AAC888") << OP_CHECKSIG;
         CBlock block;
         block.vtx.push_back(txNew);
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1231006505;
+        block.nTime    = 1365914607;
         block.nBits    = 0x1d00ffff;
-        block.nNonce   = 2083236893;
+        block.nNonce   = 1409197728;
 
         if (fTestNet)
         {
@@ -2752,7 +2752,7 @@ bool InitBlockIndex() {
         printf("%s\n", hash.ToString().c_str());
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
+        assert(block.hashMerkleRoot == uint256("0xdaaefa2a7fda3d0d6bd1848093acdb6b26acc63e0c8053bdb0c7d03e1798adca")); //not byteswapped 
         block.print();
         assert(hash == hashGenesisBlock);
 

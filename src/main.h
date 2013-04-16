@@ -25,7 +25,7 @@ class CNode;
 struct CBlockIndexWorkComparator;
 
 /** The maximum allowed size for a serialized block, in bytes (network rule) */
-static const unsigned int MAX_BLOCK_SIZE = 1000000;
+static const unsigned int MAX_BLOCK_SIZE = 267400000;
 /** The maximum size for mined blocks */
 static const unsigned int MAX_BLOCK_SIZE_GEN = MAX_BLOCK_SIZE/2;
 /** The maximum size for transactions we're willing to relay/mine **/
@@ -49,7 +49,7 @@ static const int64 MIN_TX_FEE = 50000;
 /** Fees smaller than this (in satoshi) are considered zero fee (for relaying) */
 static const int64 MIN_RELAY_TX_FEE = 10000;
 /** No amount larger than this (in satoshi) is valid */
-static const int64 MAX_MONEY = 21000000 * COIN;
+static const int64 MAX_MONEY = 1000000 * COIN;
 inline bool MoneyRange(int64 nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
 /** Coinbase transaction outputs can only be spent after this number of new blocks (network rule) */
 static const int COINBASE_MATURITY = 100;
