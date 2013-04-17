@@ -410,7 +410,7 @@ bool GetMyExternalIP(CNetAddr& ipRet)
 void ThreadGetMyExternalIP(void* parg)
 {
     // Make this thread recognisable as the external IP detection thread
-    RenameThread("bitcoin-ext-ip");
+    RenameThread("garrcoin-ext-ip"); // maybe bitcoin instead???
 
     CNetAddr addrLocalHost;
     if (GetMyExternalIP(addrLocalHost))
