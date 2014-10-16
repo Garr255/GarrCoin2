@@ -9,14 +9,7 @@ Copyright (c) 2013 GarrCoin Developers
 What is GarrCoin?
 ----------------
 
-GarrCoin is an experimental new digital currency that enables instant payments to
-anyone, anywhere in the world. GarrCoin uses peer-to-peer technology to operate
-with no central authority: managing transactions and issuing money are carried
-out collectively by the network. GarrCoin is also the name of the open source
-software which enables the use of this currency.
-
-For more information, as well as an immediately useable, binary version of
-the GarrCoin client sofware, see http://www.GarrCoin.org.
+GarrCoin is a fork of Bitcoin for Garrett and his friends to use. Godspeed!
 
 License
 -------
